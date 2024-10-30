@@ -8,6 +8,7 @@ on:
     branches: [ "main" ]
 env:
   RUNNER_AWS_REGION: us-east-2              # Set this to the region the runner should be run in.
+  EC2_IMAGE_ID: ami-0fc380fa21f7ef808
 jobs:
   start-runner:
     name: Start self-hosted EC2 runner
@@ -28,7 +29,7 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ami-09b3daca3f028e628
+          ec2-image-id: ${{ env.EC2_IMAGE_ID }}
           ec2-instance-type: c7g.4xlarge
           subnet-id: subnet-afcc80e3
           security-group-id: sg-17247164
@@ -56,7 +57,7 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ami-0862caf2c680143e0
+          ec2-image-id: ${{ env.EC2_IMAGE_ID }}
           ec2-instance-type: c5.2xlarge
           subnet-id: subnet-afcc80e3
           security-group-id: sg-17247164
