@@ -107,7 +107,7 @@ jobs:
   amd-stop-runner:
     name: Stop self-hosted EC2 runner
     needs:
-      - start-runner # required to get output from the start-runner job
+      - amd-start-runner # required to get output from the start-runner job
       - arm64-build # required to wait when the main job is done
     runs-on: ubuntu-latest
     if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
@@ -123,5 +123,5 @@ jobs:
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          label: ${{ needs.start-runner.outputs.label }}
+          label: ${{ needs.amd-start-runner.outputs.label }}
           ec2-instance-id: ${{ needs.amd-start-runner.outputs.ec2-instance-id }}
