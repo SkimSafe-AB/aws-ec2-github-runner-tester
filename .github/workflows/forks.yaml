@@ -1,0 +1,131 @@
+name: ARM64 RUNNER FORKS TEST
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+env:
+  RUNNER_AWS_REGION: us-east-2              # Set this to the region the runner should be run in.
+  ARM_EC2_IMAGE_ID: ami-0778eace43412c477
+  AMD_EC2_IMAGE_ID: ami-0fc380fa21f7ef808
+  # Example of using a specific commit hash: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
+  FULL_REPO_NAME: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
+jobs:
+  arm64-start-runner:
+    name: Start self-hosted EC2 runner
+    runs-on: ubuntu-latest
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.RUNNER_AWS_REGION }}
+      - name: Start EC2 runner
+        id: start-ec2-runner
+        uses: ${{ env.FULL_REPO_NAME }}
+        with:
+          mode: start
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          ec2-image-id: ${{ env.ARM_EC2_IMAGE_ID }}
+          ec2-instance-type: c7g.4xlarge
+          subnet-id: subnet-afcc80e3
+          security-group-id: sg-17247164
+          aws-resource-tags: > # optional, requires additional permissions
+            [
+              {"Key": "Name", "Value": "ec2-github-runner"},
+              {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
+            ]
+  arm64-build:
+    name: ARM64 Build
+    needs: arm64-start-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.arm64-start-runner.outputs.label }} # run the job on the newly created runner
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "ONE TWO THREE FOUR"
+  arm64-stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs:
+      - arm64-start-runner # required to get output from the start-runner job
+      - arm64-build # required to wait when the main job is done
+    runs-on: ubuntu-latest
+    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.RUNNER_AWS_REGION }}
+      - name: Stop EC2 runner
+        uses: ${{ env.FULL_REPO_NAME }}
+        with:
+          mode: stop
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          label: ${{ needs.arm64-start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.arm64-start-runner.outputs.ec2-instance-id }}
+  amd-start-runner:
+    name: Start self-hosted EC2 runner
+    runs-on: ubuntu-latest
+    outputs:
+      label: ${{ steps.start-ec2-runner.outputs.label }}
+      ec2-instance-id: ${{ steps.start-ec2-runner.outputs.ec2-instance-id }}
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.RUNNER_AWS_REGION }}
+      - name: Start EC2 runner
+        id: start-ec2-runner
+        uses: ${{ env.FULL_REPO_NAME }}
+        with:
+          mode: start
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          ec2-image-id: ${{ env.AMD_EC2_IMAGE_ID }}
+          ec2-instance-type: c5.2xlarge
+          subnet-id: subnet-afcc80e3
+          security-group-id: sg-17247164
+          aws-resource-tags: > # optional, requires additional permissions
+            [
+              {"Key": "Name", "Value": "ec2-github-runner"},
+              {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
+            ]
+  amd-build:
+    name: AMD Build
+    needs: amd-start-runner # required to start the main job when the runner is ready
+    runs-on: ${{ needs.amd-start-runner.outputs.label }} # run the job on the newly created runner
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build
+        run: |
+          echo "ONE TWO THREE FOUR"
+  amd-stop-runner:
+    name: Stop self-hosted EC2 runner
+    needs:
+      - amd-start-runner # required to get output from the start-runner job
+      - amd-build # required to wait when the main job is done
+    runs-on: ubuntu-latest
+    if: ${{ always() }} # required to stop the runner even if the error happened in the previous jobs
+    steps:
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.RUNNER_AWS_REGION }}
+      - name: Stop EC2 runner
+        uses: ${{ env.FULL_REPO_NAME }}
+        with:
+          mode: stop
+          github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
+          label: ${{ needs.amd-start-runner.outputs.label }}
+          ec2-instance-id: ${{ needs.amd-start-runner.outputs.ec2-instance-id }}
