@@ -11,7 +11,6 @@ env:
   ARM_EC2_IMAGE_ID: ami-0778eace43412c477
   AMD_EC2_IMAGE_ID: ami-0fc380fa21f7ef808
   # Example of using a specific commit hash: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
-  FULL_REPO_NAME: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
 jobs:
   arm64-start-runner:
     name: Start self-hosted EC2 runner
@@ -28,7 +27,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: ${{ env.FULL_REPO_NAME }}
+        uses: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -65,7 +64,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: ${{ env.FULL_REPO_NAME }}
+        uses: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -86,7 +85,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: ${{ env.FULL_REPO_NAME }}
+        uses: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -123,7 +122,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: ${{ env.FULL_REPO_NAME }}
+        uses: tverghis/ec2-github-runner@f1faf6d3845bde4651fb5f5613a19c869bf7f2be
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
