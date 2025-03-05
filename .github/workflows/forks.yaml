@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@dependabot/npm_and_yarn/multi-0f30d60bd3
+        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -64,7 +64,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@dependabot/npm_and_yarn/multi-0f30d60bd3
+        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -85,7 +85,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@dependabot/npm_and_yarn/multi-0f30d60bd3
+        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -122,7 +122,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@dependabot/npm_and_yarn/multi-0f30d60bd3
+        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
