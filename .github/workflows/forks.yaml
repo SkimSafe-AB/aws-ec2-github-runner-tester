@@ -35,6 +35,7 @@ jobs:
           ec2-instance-type: c7g.4xlarge
           subnet-id: subnet-afcc80e3
           security-group-id: sg-17247164
+          ec2-volume-size: 100
           aws-resource-tags: > # optional, requires additional permissions
             [
               {"Key": "Name", "Value": "ec2-github-runner"},
@@ -93,6 +94,7 @@ jobs:
           ec2-instance-type: c5.xlarge
           subnet-id: subnet-afcc80e3
           security-group-id: sg-17247164
+          ec2-volume-size: 100
           aws-resource-tags: > # optional, requires additional permissions
             [
               {"Key": "Name", "Value": "ec2-github-runner"},
