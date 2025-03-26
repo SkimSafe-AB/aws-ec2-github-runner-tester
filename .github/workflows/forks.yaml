@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
+        uses: esteve/ec2-github-runner@38f565af621834df2b7aefe1e5d9cc6d8963b0e2
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -40,6 +40,8 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
+          startup-quiet-period-seconds: 10
+          startup-retry-interval-seconds: 2
   arm64-build:
     name: ARM64 Build
     needs: arm64-start-runner # required to start the main job when the runner is ready
@@ -64,12 +66,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
+        uses: esteve/ec2-github-runner@38f565af621834df2b7aefe1e5d9cc6d8963b0e2
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           label: ${{ needs.arm64-start-runner.outputs.label }}
           ec2-instance-id: ${{ needs.arm64-start-runner.outputs.ec2-instance-id }}
+          startup-quiet-period-seconds: 10
+          startup-retry-interval-seconds: 2
   amd-start-runner:
     name: Start self-hosted EC2 runner
     runs-on: ubuntu-latest
@@ -85,7 +89,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
+        uses: esteve/ec2-github-runner@38f565af621834df2b7aefe1e5d9cc6d8963b0e2
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -98,6 +102,8 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
+          startup-quiet-period-seconds: 10
+          startup-retry-interval-seconds: 2
   amd-build:
     name: AMD Build
     needs: amd-start-runner # required to start the main job when the runner is ready
@@ -122,7 +128,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: jonpugh/ec2-github-runner@e752cf085bdf6e44c22b8141d1944c39cfb20a37
+        uses: esteve/ec2-github-runner@38f565af621834df2b7aefe1e5d9cc6d8963b0e2
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
