@@ -32,7 +32,7 @@ jobs:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-image-id: ${{ env.ARM_EC2_IMAGE_ID }}
-          ec2-instance-type: c7g.4xlarge
+          ec2-instance-type: c6g.large
           subnet-id: subnet-afcc80e3
           security-group-id: sg-17247164
           market-type: spot
