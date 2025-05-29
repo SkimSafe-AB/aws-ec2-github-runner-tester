@@ -32,7 +32,9 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-image-id: ${{ env.ARM_EC2_IMAGE_ID }}
           ec2-instance-type: c7g.4xlarge
-          subnet-id: subnet-afcc80e3
+          # subnet-id: subnet-afcc80e3
+          # subnet-id: subnet-14c36d7f
+          subnet-id: subnet-48c62235
           security-group-id: sg-17247164
           aws-resource-tags: > # optional, requires additional permissions
             [
@@ -92,7 +94,8 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           ec2-image-id: ${{ env.AMD_EC2_IMAGE_ID }}
           ec2-instance-type: c5.2xlarge
-          subnet-id: subnet-afcc80e3
+          # subnet-id: subnet-afcc80e3
+          subnet-id: subnet-48c62235
           security-group-id: sg-17247164
           aws-resource-tags: > # optional, requires additional permissions
             [
