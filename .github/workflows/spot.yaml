@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@feature/configurable-root-volume-size
+        uses: machulav/ec2-github-runner@feature/fix-timeout-issue
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -89,7 +89,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@feature/configurable-root-volume-size
+        uses: machulav/ec2-github-runner@feature/fix-timeout-issue
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
