@@ -105,6 +105,13 @@ jobs:
             ]
           startup-quiet-period-seconds: 30
           startup-retry-interval-seconds: 2
+          availability-zones-config:
+            > # optional, requires additional permissions
+            [
+              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-afcc80e3", "securityGroupId": "sg-17247164"},
+              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-48c62235", "securityGroupId": "sg-17247164"},
+              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-14c36d7f", "securityGroupId": "sg-17247164"}
+            ]
   amd-build:
     name: AMD Build
     needs: amd-start-runner # required to start the main job when the runner is ready
