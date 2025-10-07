@@ -108,9 +108,9 @@ jobs:
           availability-zones-config:
             > # optional, requires additional permissions
             [
-              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-afcc80e3", "securityGroupId": "sg-17247164"},
-              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-48c62235", "securityGroupId": "sg-17247164"},
-              {"imageId": ${{ env.AMD_EC2_IMAGE_ID }}, "subnetId": "subnet-14c36d7f", "securityGroupId": "sg-17247164"}
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-afcc80e3", "securityGroupId": "sg-17247164"},
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-48c62235", "securityGroupId": "sg-17247164"},
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-14c36d7f", "securityGroupId": "sg-17247164"}
             ]
   amd-build:
     name: AMD Build
