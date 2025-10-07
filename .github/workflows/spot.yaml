@@ -27,7 +27,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: KamranBiglari/ec2-github-runner@2f57af7344ea40d7c43bee623df453001e88aec9
+        uses: weavr-io/ec2-github-runner@6a8ce6801ed7b8aa4b3662f1966ad6b4e687494d
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -95,7 +95,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: KamranBiglari/ec2-github-runner@2f57af7344ea40d7c43bee623df453001e88aec9
+        uses: weavr-io/ec2-github-runner@6a8ce6801ed7b8aa4b3662f1966ad6b4e687494d
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
