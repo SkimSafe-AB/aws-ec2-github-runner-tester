@@ -31,11 +31,10 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ${{ env.ARM_EC2_IMAGE_ID }}
+          # ec2-image-id: ${{ env.ARM_EC2_IMAGE_ID }}
           ec2-instance-type: c7g.large
           # subnet-id: subnet-afcc80e3
-
-          security-group-id: sg-17247164
+          # security-group-id: sg-17247164
           market-type: spot
           aws-resource-tags: > # optional, requires additional permissions
             [
@@ -44,6 +43,13 @@ jobs:
             ]
           startup-quiet-period-seconds: 20
           startup-retry-interval-seconds: 2
+          availability-zones-config:
+            > # optional, requires additional permissions
+            [
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-afcc80e3", "securityGroupId": "sg-17247164"},
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-48c62235", "securityGroupId": "sg-17247164"},
+              {"imageId": "${{ env.AMD_EC2_IMAGE_ID }}", "subnetId": "subnet-14c36d7f", "securityGroupId": "sg-17247164"}
+            ]
   arm64-build:
     name: ARM64 Build
     needs: arm64-start-runner # required to start the main job when the runner is ready
@@ -93,10 +99,10 @@ jobs:
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
-          ec2-image-id: ${{ env.AMD_EC2_IMAGE_ID }}
+          # ec2-image-id: ${{ env.AMD_EC2_IMAGE_ID }}
           ec2-instance-type: c4.large
-          subnet-id: subnet-afcc80e3
-          security-group-id: sg-17247164
+          # subnet-id: subnet-afcc80e3
+          # security-group-id: sg-17247164
           market-type: spot
           aws-resource-tags: > # optional, requires additional permissions
             [
