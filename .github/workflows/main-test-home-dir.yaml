@@ -43,7 +43,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 10
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
   arm64-build:
     name: ARM64 Build
@@ -105,7 +105,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 10
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
   amd-build:
     name: AMD Build
