@@ -36,8 +36,8 @@ jobs:
           # subnet-id: subnet-14c36d7f
           subnet-id: subnet-48c62235
           security-group-id: sg-17247164
-          # runner-home-dir: /home/ec2-user/actions-runner
-          # run-runner-as-user: ec2-user
+          runner-home-dir: /home/ec2-user/actions-runner
+          run-runner-as-user: ec2-user
           aws-resource-tags: > # optional, requires additional permissions
             [
               {"Key": "Name", "Value": "ec2-github-runner"},
