@@ -41,7 +41,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 20
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
           availability-zones-config:
             > # optional, requires additional permissions
@@ -109,7 +109,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 30
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
           availability-zones-config:
             > # optional, requires additional permissions

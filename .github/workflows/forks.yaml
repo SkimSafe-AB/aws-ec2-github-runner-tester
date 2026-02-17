@@ -40,7 +40,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 10
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
   arm64-build:
     name: ARM64 Build
@@ -72,7 +72,7 @@ jobs:
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
           label: ${{ needs.arm64-start-runner.outputs.label }}
           ec2-instance-id: ${{ needs.arm64-start-runner.outputs.ec2-instance-id }}
-          startup-quiet-period-seconds: 10
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
   amd-start-runner:
     name: Start self-hosted EC2 runner
@@ -102,7 +102,7 @@ jobs:
               {"Key": "Name", "Value": "ec2-github-runner"},
               {"Key": "GitHubRepository", "Value": "${{ github.repository }}"}
             ]
-          startup-quiet-period-seconds: 30
+          startup-quiet-period-seconds: 2
           startup-retry-interval-seconds: 2
   amd-build:
     name: AMD Build
