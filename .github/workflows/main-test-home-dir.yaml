@@ -8,7 +8,7 @@ on:
     branches: ["main"]
 env:
   RUNNER_AWS_REGION: us-east-2 # Set this to the region the runner should be run in.
-  ARM_EC2_IMAGE_ID: ami-0163fade9331a252f
+  ARM_EC2_IMAGE_ID: ami-0dee95f50c6ce0d66
   AMD_EC2_IMAGE_ID: ami-0fc380fa21f7ef808
 jobs:
   arm64-start-runner:
