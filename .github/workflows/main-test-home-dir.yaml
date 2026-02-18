@@ -8,7 +8,7 @@ on:
     branches: ["main"]
 env:
   RUNNER_AWS_REGION: us-east-2 # Set this to the region the runner should be run in.
-  ARM_EC2_IMAGE_ID: ami-0778eace43412c477
+  ARM_EC2_IMAGE_ID: ami-00f07d867f186515b
   AMD_EC2_IMAGE_ID: ami-0fc380fa21f7ef808
 jobs:
   arm64-start-runner:
@@ -26,7 +26,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@hot-fix/revert-to-cloud-config
+        uses: machulav/ec2-github-runner@v2.5.2
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -85,7 +85,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@hot-fix/revert-to-cloud-config
+        uses: machulav/ec2-github-runner@v2.5.2
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -106,7 +106,7 @@ jobs:
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Start EC2 runner
         id: start-ec2-runner
-        uses: machulav/ec2-github-runner@hot-fix/revert-to-cloud-config
+        uses: machulav/ec2-github-runner@v2.5.2
         with:
           mode: start
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
@@ -163,7 +163,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.RUNNER_AWS_REGION }}
       - name: Stop EC2 runner
-        uses: machulav/ec2-github-runner@hot-fix/revert-to-cloud-config
+        uses: machulav/ec2-github-runner@v2.5.2
         with:
           mode: stop
           github-token: ${{ secrets.GH_PERSONAL_ACCESS_TOKEN }}
